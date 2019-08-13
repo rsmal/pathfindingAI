@@ -1,0 +1,8 @@
+.interface {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: white;
+	padding: 1rem 2rem;
+	border: 1px solid black;
+}
