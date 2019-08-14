@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Interface.css"
 
-function Interface({ list }) {
+function Interface({ list, clearPoints }) {
     return (
         <div className="interface">
             {
@@ -9,6 +9,7 @@ function Interface({ list }) {
                     <h4 key={index}>{value.name}</h4>
                 ))
             }
+            <button onClick={clearPoints}>Wyczyść</button>
         </div>
     );
 }

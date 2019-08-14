@@ -116,12 +116,25 @@ class Container extends React.Component {
 		return isInside
 	}
 
+	clearPoints = () => {
+		this.setState({
+			startPoint: {
+				x: null,
+				y: null
+			},
+			endPoint: {
+				x: null,
+				y: null
+			},
+			grid: []
+		})
+	}
 
 	render() {
 		return (
 			<div className="container">
 				{this.createCols()}
-				<Interface list={this.state.algoritms} />
+				<Interface list={this.state.algoritms} clearPoints={this.clearPoints} />
 			</div>
 		);
 	}
