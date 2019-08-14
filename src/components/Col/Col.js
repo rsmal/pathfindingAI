@@ -11,6 +11,8 @@ function Col({ length, handleClick, x, y, grid }) {
                 background = "red"
             } else if (grid[i].type === "wall") {
                 background = "gray"
+            } else if (grid[i].type === "path") {
+                background = "gold"
             }
         }
     }
