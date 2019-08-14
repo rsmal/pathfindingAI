@@ -44,7 +44,7 @@ class Container extends React.Component {
 
 		for (let y = 0; y < numberOfRows; y++) {
 			for (let x = 0; x < numberOfColumns; x++) {
-				grid.push(<Col key={`${y},${x}`} length={25} handleClick={() => this.handleColClick(x, y)} />);
+				grid.push(<Col key={`${y},${x}`} length={25} handleClick={() => this.handleColClick(x, y)} grid={this.state.grid} y={y} x={x} />);
 			}
 		}
 
@@ -71,7 +71,6 @@ class Container extends React.Component {
 	}
 
 	handleColClick = (x, y) => {
-		console.log()
 		if (this.state.startPoint.x === null || this.state.startPoint.y === null) {
 			this.addSpecialPoint(x, y, "startPoint", "startPoint")
 		} else if (this.state.endPoint.x === null || this.state.endPoint.y === null) {
@@ -99,9 +98,9 @@ class Container extends React.Component {
 				grid
 			})
 		}
-		process.nextTick(() => {
-			console.log(this.state)
-		})
+		// process.nextTick(() => {
+		// 	console.log(this.state)
+		// })
 
 	}
 
