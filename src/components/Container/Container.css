@@ -3,6 +3,5 @@
 	display: flex;
 	flex-wrap: wrap;
 	max-height: 100vh;
-	overflow: hidden;
 	position: relative;
 }

@@ -40,7 +40,9 @@ class Container extends React.Component {
 		window.onresize = () => {
 			this.setState({
 				windowWidth: window.innerWidth,
-				windowHeight: window.innerHeight
+				windowHeight: window.innerHeight,
+				numberOfColumns: Math.floor(this.state.windowWidth / 25),
+				numberOfRows: Math.floor(this.state.windowHeight / 25)
 			});
 		};
 		this.setState({
@@ -142,24 +144,42 @@ class Container extends React.Component {
 	}
 
 	launch = () => {
-		if (this.state.chooseAlgo) {
-			const matrixGrid = createMatrixGrid(this.state.grid, this.state.numberOfColumns, this.state.numberOfRows)
-			const filtered = this.state.algoritms.filter((value, index) => {
-				return value.name === this.state.chooseAlgo
-			})
-			const path = getPath(this.state.startPoint, this.state.endPoint, matrixGrid, filtered[0].finder)
-			const { grid } = this.state
-			for (let i = 0; i < path.length; i++) {
-				grid.push({
-					x: path[i][0],
-					y: path[i][1],
-					type: "path"
+		this.clearPath()
+		process.nextTick(() => {
+			if (this.state.chooseAlgo) {
+				const matrixGrid = createMatrixGrid(this.state.grid, this.state.numberOfColumns, this.state.numberOfRows)
+				const filtered = this.state.algoritms.filter((value, index) => {
+					return value.name === this.state.chooseAlgo
+				})
+
+
+				const path = getPath(this.state.startPoint, this.state.endPoint, matrixGrid, filtered[0].finder, this.state.chooseAlgo)
+
+
+				const { grid } = this.state
+				for (let i = 0; i < path.length; i++) {
+					grid.push({
+						x: path[i][0],
+						y: path[i][1],
+						type: "path"
+					})
+				}
+				this.setState({
+					grid
 				})
 			}
-			this.setState({
-				grid
-			})
-		}
+		})
+
+	}
+
+	clearPath = () => {
+		let { grid } = this.state
+		let newGrid = grid.filter((value, index) => {
+			return value.type !== "path"
+		})
+		this.setState({
+			grid: newGrid
+		})
 	}
 
 	changeAlgo = (algo) => {
@@ -174,7 +194,7 @@ class Container extends React.Component {
 		return (
 			<div className="container">
 				{this.createCols()}
-				<Interface list={this.state.algoritms} clearPoints={this.clearPoints} start={this.launch} chooseAlgo={this.state.chooseAlgo} changeAlgo={this.changeAlgo} />
+				<Interface list={this.state.algoritms} clearPoints={this.clearPoints} clearPath={this.clearPath} start={this.launch} chooseAlgo={this.state.chooseAlgo} changeAlgo={this.changeAlgo} />
 			</div>
 		);
 	}

@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Interface.css"
 
-function Interface({ list, clearPoints, start, chooseAlgo, changeAlgo }) {
+function Interface({ list, clearPoints, start, chooseAlgo, changeAlgo, clearPath }) {
     return (
         <div className="interface">
             {
@@ -20,6 +20,8 @@ function Interface({ list, clearPoints, start, chooseAlgo, changeAlgo }) {
             }
             <button onClick={start}>Start</button>
             <button onClick={clearPoints}>Wyczyść</button>
+            <br></br>
+            <button onClick={clearPath}>Wyczyść ściezke </button>
         </div>
     );
 }
